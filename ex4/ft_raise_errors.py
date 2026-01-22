@@ -20,32 +20,20 @@ def check_plant_health(plant_name: str, water_level: int,
 
 
 def test_plant_checks():
-    print("Testing good values...")
-    try:
-        check_plant_health("tomato", 5, 5)
-    except ValueError as e:
-        print(e)
-
-    print("\n" + "Testing empty plant name...")
-    try:
-        check_plant_health("", 5, 5)
-    except ValueError as e:
-        print(e)
-
-    print("\n" + "Testing bad water level...")
-    try:
-        check_plant_health("tomato", 15, 5)
-    except ValueError as e:
-        print(e)
-
-    print("\n" + "Testing bad sunlight hours...")
-    try:
-        check_plant_health("tomato", 5, 0)
-    except ValueError as e:
-        print(e)
+    title = ["Testing good values...", "Testing empty plant name...",
+             "Testing bad water level...", "Testing bad sunlight hours..."]
+    name = ["tomato", "", "tomato", "tomato"]
+    water = [5, 5, 15, 5]
+    sun = [5, 5, 5, 0]
+    for tv, nv, wv, sv in zip(title, name, water, sun):
+        print("\n" f"{tv}")
+        try:
+            check_plant_health(nv, wv, sv)
+        except ValueError as e:
+            print(e)
 
 
 if __name__ == "__main__":
-    print(" Garden Plant Health Checker ".center(40, "=") + "\n")
+    print(" Garden Plant Health Checker ".center(40, "="))
     test_plant_checks()
     print("\n" + "All error raising tests completed!")
