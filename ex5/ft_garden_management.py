@@ -24,43 +24,44 @@ class GardenManager:
         except PlantError as e:
             print(e)
         else:
-            print(f"Added {name} successfully")
-
             self.name = name.capitalize()
             self.water_level = water_level
             self.sun_hours = sun_hours
+            print(f"Added {name} successfully")
 
     def check_plant(self) -> str:
-        try:
-            if (self.water_level < 1):
-                GardenManager.error_save.append(f"{self.name} "
-                                                "not enough water in tank")
-                raise ValueError(f"water level {self.water_level} "
-                                 "is too low (min 1)")
-            if (self.water_level > 10):
-                GardenManager.error_save.append(f"{self.name} "
-                                                "too much water in the tank")
-                raise ValueError(f"water level {self.water_level} "
-                                 "is too high (max 10)")
-        except ValueError as e:
-            return (print(f"Error checking {self.name}: {e}"))
+        if (self.water_level < 1 or self.water_level > 10 or
+                self.sun_hours < 2 or self.sun_hours > 12):
+            try:
+                if (self.water_level < 1):
+                    GardenManager.error_save.append(f"{self.name} "
+                                                    "not enough water in tank")
+                    raise ValueError(f"water level {self.water_level} "
+                                     "is too low (min 1)")
+                if (self.water_level > 10):
+                    GardenManager.error_save.append(f"{self.name} too much "
+                                                    "water in the tank")
+                    raise ValueError(f"water level {self.water_level} "
+                                     "is too high (max 10)")
+            except ValueError as e:
+                print(f"Error checking {self.name}: {e}")
 
-        try:
-            if (self.sun_hours < 2):
-                GardenManager.error_save.append(f"{self.name} "
-                                                "not enough sunlight")
-                raise ValueError(f"sunlight hours {self.sun_hours} "
-                                 "is too low (min 2)")
-            if (self.sun_hours > 12):
-                GardenManager.error_save.append(f"{self.name} "
-                                                "too much sun")
-                raise ValueError(f"sunlight hours {self.sun_hours} "
-                                 "is too high (max 12)")
-        except ValueError as e:
-            return (print(f"Error checking {self.name}: {e}"))
-
-        print(f"{self.name}: healthy (water: "
-              f"{self.water_level}, sun: {self.sun_hours})")
+            try:
+                if (self.sun_hours < 2):
+                    GardenManager.error_save.append(f"{self.name} "
+                                                    "not enough sunlight")
+                    raise ValueError(f"sunlight hours {self.sun_hours} "
+                                     "is too low (min 2)")
+                if (self.sun_hours > 12):
+                    GardenManager.error_save.append(f"{self.name} "
+                                                    "too much sun")
+                    raise ValueError(f"sunlight hours {self.sun_hours} "
+                                     "is too high (max 12)")
+            except ValueError as e:
+                print(f"Error checking {self.name}: {e}")
+        else:
+            print(f"{self.name}: healthy (water: "
+                  f"{self.water_level}, sun: {self.sun_hours})")
 
     def print_error_and_recovery(self):
         while len(GardenManager.error_save) > 0:
