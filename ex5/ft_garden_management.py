@@ -13,10 +13,30 @@ class ValueError(GardenError):
 
 
 class GardenManager:
+    """Manage a garden with multiple plants.
+
+    Tracks plant health, water levels, sunlight exposure, and errors.
+
+    Attributes:
+        error_save (list): Class attribute to store error messages.
+        name (str): The name of the plant.
+        water_level (int): The water level (1-10).
+        sun_hours (int): Daily sunlight hours (2-12).
+    """
+
     error_save = []
 
-    def __init__(self, name: str, water_level: int, sun_hours) -> None:
+    def __init__(self, name: str, water_level: int, sun_hours: int) -> None:
+        """Initialize a new plant in the garden.
 
+        Args:
+            name (str): The name of the plant.
+            water_level (int): The water level for the plant.
+            sun_hours (int): Daily sunlight hours needed.
+
+        Raises:
+            PlantError: If the plant name is empty or None.
+        """
         try:
             if (name == "" or name is None):
                 raise PlantError("Error adding plant: "
@@ -29,7 +49,12 @@ class GardenManager:
             self.sun_hours = sun_hours
             print(f"Added {name} successfully")
 
-    def check_plant(self) -> str:
+    def check_plant(self) -> None:
+        """Check the health of the plant.
+
+        Validates water level and sunlight hours against acceptable ranges
+        and stores any errors for later recovery handling.
+        """
         if (self.water_level < 1 or self.water_level > 10 or
                 self.sun_hours < 2 or self.sun_hours > 12):
             try:
@@ -63,7 +88,12 @@ class GardenManager:
             print(f"{self.name}: healthy (water: "
                   f"{self.water_level}, sun: {self.sun_hours})")
 
-    def print_error_and_recovery(self):
+    def print_error_and_recovery(self) -> None:
+        """Print stored errors and recover plant parameters to safe values.
+
+        Removes and prints all errors from the error_save list and adjusts
+        water_level and sun_hours to be within acceptable ranges.
+        """
         while len(GardenManager.error_save) > 0:
             error = GardenManager.error_save.pop(0)
             print(f"Caught GardenError: {error}")
@@ -76,11 +106,20 @@ class GardenManager:
         elif (self.sun_hours < 2):
             self.sun_hours = 2
 
-    def watering_garden(self):
+    def watering_garden(self) -> None:
+        """Water the plant.
+
+        Prints a success message indicating the plant has been watered.
+        """
         print(f"Watering {self.name} - success")
 
 
-def test_garden_management():
+def test_garden_management() -> None:
+    """Test the complete garden management system.
+
+    Tests plant initialization, watering, health checking, and
+    error recovery procedures.
+    """
     print("Adding plants to garden...")
     flower1 = GardenManager("tomato", 5, 8)
     flower2 = GardenManager("lettuce", 15, 5)

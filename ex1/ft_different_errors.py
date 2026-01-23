@@ -1,6 +1,17 @@
 #! /bin/python3.10
 
 def garden_operations(error_type: str) -> None:
+    """Perform garden operations based on error type.
+
+    Args:
+        error_type (str): Type of error to test.
+
+    Raises:
+        ValueError: If error_type is "ValueError".
+        ZeroDivisionError: If error_type is "ZeroDivisionError".
+        FileNotFoundError: If error_type is "FileNotFoundError".
+        KeyError: If error_type is "KeyError".
+    """
     if (error_type == "ValueError"):
         int("abc")
     if (error_type == "ZeroDivisionError"):
@@ -19,6 +30,11 @@ def garden_operations(error_type: str) -> None:
 
 
 def test_error_types() -> None:
+    """Test different error types in garden operations.
+
+    Tests ValueError, ZeroDivisionError, FileNotFoundError, and KeyError
+    by catching them individually and also testing multiple errors together.
+    """
     test_value = ["ValueError", "ZeroDivisionError", "FileNotFoundError",
                   "KeyError"]
 

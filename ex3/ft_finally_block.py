@@ -1,6 +1,17 @@
 #! /bin/python3.10
 
-def water_plants(plant_list):
+def water_plants(plant_list: list) -> None:
+    """Water plants from the given list.
+
+    Opens the watering system, waters each plant in the list, and ensures
+    the watering system is closed in the finally block, even if an error occurs
+
+    Args:
+        plant_list (list): A list of plant names to water.
+
+    Raises:
+        ValueError: If a plant in the list is None.
+    """
     print("Opening watering system")
     try:
         for plant in plant_list:
@@ -15,7 +26,12 @@ def water_plants(plant_list):
         print("Closing watering system (cleanup)")
 
 
-def test_watering_system():
+def test_watering_system() -> None:
+    """Test the watering system with valid and invalid plant lists.
+
+    Tests normal watering flow and error handling when encountering
+    invalid plant entries.
+    """
     good_list = ["tomato", "lettuce", "carrots"]
     bad_list = ["tomato", None, "carrots"]
 
