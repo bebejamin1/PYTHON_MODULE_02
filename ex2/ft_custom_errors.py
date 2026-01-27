@@ -35,7 +35,7 @@ class Plant:
         """Get the age of the plant.
 
         Returns:
-            int: The age of the plant.
+            str: The age of the plant.
         """
         return (self.__age)
 
@@ -43,7 +43,7 @@ class Plant:
         """Set the age of the plant.
 
         Args:
-            value (int): The age value to set.
+            value (str): The age value to set.
 
         Raises:
             PlantError: If the value is "wilting".
@@ -57,7 +57,7 @@ class Plant:
         """Get the watering level of the plant.
 
         Returns:
-            int: The watering level of the plant.
+            str: The watering level of the plant.
         """
         return (self.__watering)
 

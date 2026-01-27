@@ -11,6 +11,10 @@ class PlantError(GardenError):
 class ValueError(GardenError):
     pass
 
+class Plant:
+
+    def __init__(self, name: str, water_level: int, sun_hours: int) -> None:
+
 
 class GardenManager:
     """Manage a garden with multiple plants.
